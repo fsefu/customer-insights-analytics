@@ -15,11 +15,32 @@ class TelecomDataAnalyzer:
         # Exclude 'Unknown' values from the count
         top_10_handsets = self.df[self.df['Handset Type'] != 'Unknown']['Handset Type'].value_counts().head(10)
         return top_10_handsets
+    def plot_top_10_handsets(self):
+        top_10_handsets = self.get_top_10_handsets()
+        # Plot a bar chart
+        top_10_handsets.plot(kind='bar', color='skyblue', figsize=(10, 6))
+        plt.title('Top 10 Handsets by Frequency of Use')
+        plt.xlabel('Handset Type')
+        plt.ylabel('Frequency')
+        plt.xticks(rotation=45, ha='right')
+        plt.tight_layout()
+        plt.show()
     
     def get_top_3_manufacturers(self):
         # Counting occurrences of each handset manufacturer
         top_3_manufacturers = self.df['Handset Manufacturer'].value_counts().head(3)
         return top_3_manufacturers
+    
+    def plot_top_3_manufacturers(self):
+        # Plot bar chart for top 3 manufacturers
+        top_3_manufacturers = self.get_top_3_manufacturers()
+        top_3_manufacturers.plot(kind='bar', color='lightgreen', figsize=(8, 5))
+        plt.title('Top 3 Handset Manufacturers by Frequency')
+        plt.xlabel('Manufacturer')
+        plt.ylabel('Frequency')
+        plt.xticks(rotation=0, ha='center')
+        plt.tight_layout()
+        plt.show()
 
     def get_top_5_handsets_per_top_3_manufacturers(self):
         # Getting the top 3 manufacturers
