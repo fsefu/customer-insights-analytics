@@ -26,8 +26,16 @@ class TelecomEngagementAnalysis:
     
     def top_customers_by_metric(self, metric, top_n=10):
         """Return the top N customers based on a specific metric."""
-        top_customers = self.agg_data.nlargest(top_n, metric)
-        return top_customers[['MSISDN/Number', metric]]
+        # Check if the metric exists in the aggregated data
+        if metric not in self.agg_data.columns:
+            raise ValueError(f"Metric {metric} not found in aggregated data columns.")
+        
+        # Sort the data based on the metric and select the top N customers
+        top_customers = self.agg_data[['MSISDN/Number', metric]].nlargest(top_n, metric)
+        
+        # Return the DataFrame (which can be displayed directly without print)
+        return top_customers
+
     
     def normalize_metrics(self):
         """Normalize engagement metrics for clustering."""
