@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 class TelecomDataAnalyzer:
     def __init__(self, dataframe):
@@ -15,6 +16,16 @@ class TelecomDataAnalyzer:
         # Exclude 'Unknown' values from the count
         top_10_handsets = self.df[self.df['Handset Type'] != 'Unknown']['Handset Type'].value_counts().head(10)
         return top_10_handsets
+    def plot_top_10_handsets(self):
+        top_10_handsets = self.get_top_10_handsets()
+        # Plot a bar chart
+        top_10_handsets.plot(kind='bar', color='skyblue', figsize=(10, 6))
+        plt.title('Top 10 Handsets by Frequency of Use')
+        plt.xlabel('Handset Type')
+        plt.ylabel('Frequency')
+        plt.xticks(rotation=45, ha='right')
+        plt.tight_layout()
+        plt.show()
     def plot_top_10_handsets(self):
         top_10_handsets = self.get_top_10_handsets()
         # Plot a bar chart
@@ -54,6 +65,42 @@ class TelecomDataAnalyzer:
             top_5_handsets[manufacturer] = manufacturer_data['Handset Type'].value_counts().head(5)
 
         return top_5_handsets
+
+    def plot_top_5_handsets_per_top_3_manufacturers(self):
+        # Get data for top 5 handsets per top 3 manufacturers
+        top_5_handsets = self.get_top_5_handsets_per_top_3_manufacturers()
+        
+        # Create a list of all unique handsets in top 5 per manufacturer
+        handsets = list(set([handset for handsets_list in top_5_handsets.values() for handset in handsets_list.index]))
+        
+        # Create a figure and axis for plotting
+        fig, ax = plt.subplots(figsize=(12, 8))
+        
+        # Bar width for each manufacturer
+        bar_width = 0.25
+        # Bar positions on the x-axis
+        indices = np.arange(len(handsets))
+        
+        # Plot each manufacturer's top 5 handsets
+        for i, (manufacturer, handsets_count) in enumerate(top_5_handsets.items()):
+            # Align bars with an offset for each manufacturer
+            bar_positions = indices + i * bar_width
+            ax.bar(bar_positions, [handsets_count.get(handset, 0) for handset in handsets], 
+                   width=bar_width, label=manufacturer)
+        
+        # Add title and labels
+        ax.set_title('Top 5 Handsets Per Top 3 Manufacturers')
+        ax.set_xlabel('Handset Type')
+        ax.set_ylabel('Frequency')
+        ax.set_xticks(indices + bar_width)
+        ax.set_xticklabels(handsets, rotation=45, ha='right')
+        
+        # Add legend
+        ax.legend(title='Manufacturer')
+
+        # Improve layout
+        plt.tight_layout()
+        plt.show()
 
     def generate_recommendations(self):
         # Fetch top handsets and manufacturers
