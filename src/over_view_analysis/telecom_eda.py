@@ -29,6 +29,16 @@ class TelecomEDA:
         # Ensure DL and UL columns exist in the dataset
         self.dl_columns = [col for col in self.dl_columns if col in self.data.columns]
         self.ul_columns = [col for col in self.ul_columns if col in self.data.columns]
+        self.data['application_type'] = self.data.apply(
+                    lambda row: 'YouTube' if row['Youtube DL (Bytes)'] > 0 
+                    else 'Netflix' if row['Netflix DL (Bytes)'] > 0
+                    else 'Social Media' if row['Social Media DL (Bytes)'] > 0
+                    else 'Gaming' if row['Gaming DL (Bytes)'] > 0
+                    else 'Google' if row['Google DL (Bytes)'] > 0
+                    else 'Email' if row['Email DL (Bytes)'] > 0
+                    else 'Other', axis=1
+                )
+                
 
     def describe_variables(self):
         """
@@ -63,17 +73,6 @@ class TelecomEDA:
         print(f"Decile Summary:\n{decile_summary}")
         return decile_summary
     
-    # def basic_metrics(self):
-    #     """
-    #     Analyze basic metrics (mean, median) for the dataset
-    #     """
-    #     metrics = {
-    #         'mean': self.data.mean(),
-    #         'median': self.data.median(),
-    #         'std_dev': self.data.std()
-    #     }
-    #     print(f"Basic Metrics:\n{metrics}")
-    #     return metrics
     def basic_metrics(self):
         """
         Analyze basic metrics (mean, median, standard deviation) for numeric columns only.
@@ -124,6 +123,7 @@ class TelecomEDA:
         """
         Explore relationships between applications & total DL+UL data.
         """
+
         plt.figure(figsize=(10, 6))
         sns.scatterplot(data=self.data, x='total_data', y='application_type', hue='total_duration')
         plt.title("Bivariate Analysis: Application vs Data")
