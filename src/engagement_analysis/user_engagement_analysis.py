@@ -1,5 +1,5 @@
-# user_engagement_analysis.py
 import pandas as pd
+import matplotlib.pyplot as plt
 
 class UserEngagementAnalysis:
     def __init__(self, data):
@@ -29,6 +29,39 @@ class UserEngagementAnalysis:
         engagement_metrics = engagement_metrics.reset_index()
 
         return engagement_metrics
+    
+    def plot_aggregated_metrics(self):
+        """
+        Plot a multi-series line chart to display aggregated user metrics.
+        Metrics displayed: session frequency, session duration, total download, total upload.
+        """
+        # Get aggregated user metrics
+        metrics_df = self.aggregate_user_metrics()
+
+        # Sort data by session frequency to have a meaningful X-axis
+        metrics_df = metrics_df.sort_values(by='sessions_frequency', ascending=False).head(20)  # limit to top 20 for clarity
+
+        # Create a figure and axis
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        # Plot each metric as a separate line
+        ax.plot(metrics_df['MSISDN/Number'], metrics_df['sessions_frequency'], label='Session Frequency', marker='o')
+        ax.plot(metrics_df['MSISDN/Number'], metrics_df['total_session_duration'], label='Session Duration (ms)', marker='o')
+        ax.plot(metrics_df['MSISDN/Number'], metrics_df['total_download'], label='Total Download (Bytes)', marker='o')
+        ax.plot(metrics_df['MSISDN/Number'], metrics_df['total_upload'], label='Total Upload (Bytes)', marker='o')
+
+        # Set titles and labels
+        ax.set_title('Aggregated Metrics Across Users')
+        ax.set_xlabel('User (MSISDN/Number)')
+        ax.set_ylabel('Metrics Value')
+        ax.legend()
+
+        # Rotate X-axis labels for better readability
+        plt.xticks(rotation=45, ha='right')
+
+        # Adjust layout
+        plt.tight_layout()
+        plt.show()
 
     def top_customers_by_engagement(self, metric, top_n=10):
         """
