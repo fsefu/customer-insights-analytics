@@ -72,21 +72,3 @@ class SatisfactionKMeans:
         plt.legend(title='Cluster')
         plt.grid(True)
         plt.show()
-
-# # Example usage:
-# if __name__ == "__main__":
-#     # Load your user data with engagement and experience scores
-#     user_scores_df = pd.read_csv('user_scores.csv')  # Replace with your data source
-    
-#     # Instantiate the SatisfactionKMeans class
-#     kmeans_analysis = SatisfactionKMeans(data=user_scores_df)
-    
-#     # Preprocess data and run K-means
-#     kmeans_analysis.preprocess_data()
-#     clustered_data = kmeans_analysis.run_kmeans(k=2)
-    
-#     # Visualize the clusters
-#     kmeans_analysis.visualize_clusters()
-    
-#     # Display the resulting DataFrame with cluster labels
-#     print(clustered_data.head())
