@@ -58,9 +58,3 @@ class NetworkParameterAnalyzer:
         print(f"Top 10: {stats['top_n']}")
         print(f"Bottom 10: {stats['bottom_n']}")
         print(f"Most Frequent 10: {stats['most_frequent']}")
-
-# Sample usage:
-# df = pd.read_csv("your_data.csv")
-# analyzer = NetworkParameterAnalyzer(df)
-# tcp_stats = analyzer.compute_tcp_stats()
-# analyzer.print_stats("TCP Retransmission", tcp_stats)
