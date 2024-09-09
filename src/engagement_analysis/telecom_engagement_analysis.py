@@ -9,6 +9,7 @@ class TelecomEngagementAnalysis:
     def __init__(self, data):
         """Initialize the class with the dataset."""
         self.data = data
+        self.kmeans = None  # Initialize kmeans attribute
     
     def aggregate_metrics_by_customer(self):
         """Aggregate metrics per MSISDN (customer ID) and calculate total engagement metrics."""
@@ -26,16 +27,10 @@ class TelecomEngagementAnalysis:
     
     def top_customers_by_metric(self, metric, top_n=10):
         """Return the top N customers based on a specific metric."""
-        # Check if the metric exists in the aggregated data
         if metric not in self.agg_data.columns:
             raise ValueError(f"Metric {metric} not found in aggregated data columns.")
-        
-        # Sort the data based on the metric and select the top N customers
         top_customers = self.agg_data[['MSISDN/Number', metric]].nlargest(top_n, metric)
-        
-        # Return the DataFrame (which can be displayed directly without print)
         return top_customers
-
     
     def normalize_metrics(self):
         """Normalize engagement metrics for clustering."""
@@ -48,8 +43,8 @@ class TelecomEngagementAnalysis:
     
     def k_means_clustering(self, n_clusters=3):
         """Run K-Means clustering on the normalized data."""
-        kmeans = KMeans(n_clusters=n_clusters, random_state=0)
-        self.agg_data['Cluster'] = kmeans.fit_predict(self.normalized_data)
+        self.kmeans = KMeans(n_clusters=n_clusters, random_state=0)
+        self.agg_data['Cluster'] = self.kmeans.fit_predict(self.normalized_data)
         return self.agg_data
     
     def compute_cluster_statistics(self):
@@ -108,4 +103,3 @@ class TelecomEngagementAnalysis:
         plt.ylabel('Total Traffic (Bytes)')
         plt.xticks(rotation=45)
         plt.show()
-

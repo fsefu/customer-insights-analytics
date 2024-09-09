@@ -67,6 +67,12 @@ class ExperienceClustering:
         for i in range(3):
             print(f"Cluster {i} characteristics:\n{centroid_df.iloc[i]}\n")
     
+    def get_clustered_data(self):
+        """
+        Return the DataFrame with the cluster labels.
+        """
+        return self.df[['MSISDN/Number', 'Cluster']]
+
     def run(self):
         """
         Run the entire clustering process: preprocessing, clustering, visualization, and description.
@@ -75,9 +81,3 @@ class ExperienceClustering:
         self.perform_clustering()
         self.visualize_clusters()
         self.describe_clusters()
-
-# Assuming df is your DataFrame loaded with the data
-# Example usage:
-# df = pd.read_csv('your_dataset.csv')
-# clustering = UserExperienceClustering(df)
-# clustering.run()
