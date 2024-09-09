@@ -43,4 +43,3 @@ class AggregateCustomer:
     def run_analysis(self):
         self.handle_missing_values()
         return self.aggregate_user_experience()
-f
