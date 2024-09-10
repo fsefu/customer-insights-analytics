@@ -23,14 +23,24 @@ class TellCoAnalyticsDashboard:
 
     @staticmethod
     def connect_to_database():
-        db_connection = DatabaseConnection(
-            db_name=os.getenv('DB_NAME'),
-            user=os.getenv('DB_USER'),
-            password=os.getenv('DB_PASSWORD'),
-            host=os.getenv('DB_HOST'),
-            port=os.getenv('DB_PORT')
-        )
+        if os.getenv('STREAMLIT_ENV') == 'production':
+            db_connection = DatabaseConnection(
+                db_name=st.secrets["DB_NAME"],
+                user=st.secrets["DB_USER"],
+                password=st.secrets["DB_PASSWORD"],
+                host=st.secrets["DB_HOST"],
+                port=st.secrets["DB_PORT"]
+            )
+        else:
+            db_connection = DatabaseConnection(
+                db_name=os.getenv('DB_NAME'),
+                user=os.getenv('DB_USER'),
+                password=os.getenv('DB_PASSWORD'),
+                host=os.getenv('DB_HOST'),
+                port=os.getenv('DB_PORT')
+            )
         db_connection.connect()
+        
         return db_connection
 
     def load_and_clean_data(self):
