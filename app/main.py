@@ -31,6 +31,8 @@ class TellCoAnalyticsDashboard:
                 host=st.secrets["DB_HOST"],
                 port=st.secrets["DB_PORT"]
             )
+            db_connection.connect()
+            return db_connection
         else:
             db_connection = DatabaseConnection(
                 db_name=os.getenv('DB_NAME'),
@@ -39,9 +41,9 @@ class TellCoAnalyticsDashboard:
                 host=os.getenv('DB_HOST'),
                 port=os.getenv('DB_PORT')
             )
-        db_connection.connect()
-        
-        return db_connection
+            db_connection.connect()
+            
+            return db_connection
 
     def load_and_clean_data(self):
         data_loader = TelecoDataLoader(db_connection=self.db_connection)
