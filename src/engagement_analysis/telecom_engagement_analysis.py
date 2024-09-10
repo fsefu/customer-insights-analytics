@@ -41,6 +41,7 @@ class TelecomEngagementAnalysis:
         )
         return self.normalized_data
     
+    
     def k_means_clustering(self, n_clusters=3):
         """Run K-Means clustering on the normalized data."""
         self.kmeans = KMeans(n_clusters=n_clusters, random_state=0)
