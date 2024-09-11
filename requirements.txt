@@ -3,9 +3,9 @@ pandas==2.2.2
 SQLAlchemy==2.0.34
 psycopg2-binary==2.9.9
 ipykernel==6.29.5
-ipython==8.26.0
+ipython
 jupyter==1.0.0
-numpy==2.1.1
+numpy
 matplotlib==3.9.2
 seaborn==0.13.2
 scikit-learn==1.5.1
