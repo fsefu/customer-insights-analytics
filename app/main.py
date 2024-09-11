@@ -1,6 +1,8 @@
 import os
 import sys
 import streamlit as st
+import mlflow
+import mlflow.sklearn
 from dashboard_analytics.satisfaction_analysis import SatisfactionAnalytics
 from dashboard_analytics.user_overview import UserOverview
 from dashboard_analytics.experience_analytics import ExperienceAnalytics
@@ -57,6 +59,16 @@ class TellCoAnalyticsDashboard:
 
         return data_cleaner.df
 
+    def track_model(self, analysis_name, params, metrics):
+        mlflow.set_experiment("TellCo_Model_Tracking")
+        
+        with mlflow.start_run(run_name=analysis_name):
+            mlflow.log_params(params)
+            mlflow.log_metrics(metrics)
+            mlflow.log_artifact("xdr_data.csv")  # Example of logging artifacts
+
+            st.write(f"Model tracking for {analysis_name} completed.")
+
     def run(self):
         st.title("TellCo User Analytics Dashboard")
         st.sidebar.header("Navigation")
@@ -65,17 +77,21 @@ class TellCoAnalyticsDashboard:
             ["User Overview", "Experience Analytics", "Engagement Analytics", "Satisfaction Analytics"]
         )
 
-
         if option == "User Overview":
             UserOverview(self.df).display()
+            self.track_model("User Overview", params={"example_param": "value"}, metrics={"example_metric": 0.9})
         elif option == "Experience Analytics":
             ExperienceAnalytics(self.df).display()
+            self.track_model("Experience Analytics", params={"example_param": "value"}, metrics={"example_metric": 0.85})
         elif option == "Engagement Analytics":
             EngagementAnalytics(self.df).display()
+            self.track_model("Engagement Analytics", params={"example_param": "value"}, metrics={"example_metric": 0.8})
         elif option == "Satisfaction Analytics":
             SatisfactionAnalytics(self.df).display()
+            self.track_model("Satisfaction Analytics", params={"example_param": "value"}, metrics={"example_metric": 0.95})
 
 # Run the dashboard
 if __name__ == '__main__':
+
     dashboard = TellCoAnalyticsDashboard()
     dashboard.run()
