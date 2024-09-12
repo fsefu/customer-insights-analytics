@@ -55,3 +55,17 @@ The analysis is built using Python and incorporates several methodologies, inclu
 git clone https://github.com/fsefu/customer-insights-analytics.git
 cd customer-insights-analytics
 ```
+
+ ## 2. Setup Virtual Environment
+It is recommended to use a virtual environment to manage dependencies.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+ ## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
