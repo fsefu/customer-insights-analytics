@@ -48,6 +48,21 @@ class TopSatisfactionAnalysis(EngagementExperienceScores):
         top_customers = satisfied_customers.sort_values(by='satisfaction_score', ascending=False).head(n)
         
         return top_customers[['MSISDN/Number', 'satisfaction_score']]
+    def satisfied_customers(self):
+        """
+        Retrieve the top N satisfied customers based on the satisfaction score.
+        
+        Parameters:
+        - n: Number of top satisfied customers to retrieve (default is 10).
+        
+        Returns:
+        - DataFrame containing the top N satisfied customers.
+        """
+        # Calculate satisfaction scores
+        satisfied_customers = self.calculate_satisfaction_score()
+        
+   
+        return satisfied_customers[['MSISDN/Number', 'satisfaction_score']]
 
     def visualize_top_satisfaction(self, user_scores_df):
         """
