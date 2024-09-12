@@ -12,38 +12,67 @@ The analysis is built using Python and incorporates several methodologies, inclu
 ## Repository Structure
 
 ```bash
-.
+Customer-Insights-Analytics/
+├── .devcontainer/
 ├── .github/
-│   └── workflows/        # CI/CD pipelines for automatic testing, linting, and deployment.
+│   └── workflows/
+│       └── unittests.yml
+├── .vscode/
 ├── app/
-│   ├── dashboard_analysis.py  # Main dashboard logic for rendering user behavior, engagement, experience, and satisfaction insights.
-│   ├── engagement_analysis.py # Engagement-related visualizations and metrics.
-│   ├── experience_analysis.py # Experience-based metrics and clustering insights.
-│   ├── satisfaction_analysis.py # Satisfaction score prediction and regression performance.
-│   └── user_overview.py    # General user and handset analysis.
+│   ├── dashboard_analytics/
+│   │   ├── engagement_analysis.py
+│   │   ├── experience_analytics.py
+│   │   ├── satisfaction_analysis.py
+│   │   └── user_overview.py
+│   └── main.py
 ├── databases/
-│   ├── connections.py      # Establishes connection to local PostgreSQL and MySQL databases.
-│   └── database_conversion.py # Handles data export and database structure conversion.
+│   ├── connections/
+│       ├── database_connector.py
+│     
+├── mlruns/
 ├── notebooks/
-│   ├── engagement_analysis.ipynb  # Detailed user engagement metrics exploration.
-│   ├── experience_analysis.ipynb  # Network experience metrics and clustering insights.
-│   ├── overview_analysis.ipynb    # High-level user and handset analysis.
-│   └── satisfaction_analysis.ipynb # Satisfaction prediction model evaluation.
+│   ├── engagement_analysis.ipynb
+│   ├── experience_analytics.ipynb
+│   ├── export_db.ipynb
+│   ├── overview_analysis.ipynb
+│   └── satisfaction_analysis.ipynb
 ├── scripts/
-│   ├── data_cleaning/      
-│   │   └── data_cleaning.py # Main data cleaning script for preprocessing.
-│   ├── data_loader/
-│   │   └── mega_data_loader.py # Consolidated script for loading data.
 │   └── data_export/
-│       └── data_to_export.py # Aggregates and exports data to MySQL.
-├── tasks/
-│   ├── export_to_db.py      # Bulk export of final analysis results to the database.
-│   └── load_smy.py          # Utility to load summary statistics for data interpretation.
+│       └── data_to_export.py
+├── src/
+│   ├── cleaning/
+│   │   └── data_cleaning.py
+│   ├── data_loader/
+│   │   └── teleco_data_loader.py
+│   ├── engagement_analysis/
+│   │   ├── telecom_engagement_analysis.py
+│   │   └── user_engagement_analysis.py
+│   ├── experience_analytics/
+│   │   ├── aggregate_customer.py
+│   │   ├── distribution_analysis.py
+│   │   ├── experience_clustering.py
+│   │   └── network_parameter_analyzer.py
+│   ├── overview_analysis/
+│   │   ├── telecom_data_analyzer.py
+│   │   └── telecom_eda.py
+│   └── satisfaction_analysis/
+│       ├── cluster_score_aggregator.py
+│       ├── engagement_experience_scores.py
+│       ├── final_data_exporter.py
+│       ├── satisfaction_kmeans.py
+│       ├── satisfaction_score_predictor.py
+│       └── top_satisfactions_analysis.py
+├── tests/
+│   └── export_to_db.py
 ├── utils/
-│   ├── Dockerfile           # Docker configuration for containerization.
-│   ├── requirements.txt     # Python dependencies.
-│   └── .gitignore           # Files and directories to be ignored in Git.
-└── README.md                # Project documentation.
+│   ├── export_to_db.py
+│   └── load_env.py
+├── .dockerignore
+├── .env
+├── .gitignore
+├── Dockerfile
+├── README.md
+└── requirements.txt
 
 ```
 
