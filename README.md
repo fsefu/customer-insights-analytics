@@ -52,6 +52,6 @@ The analysis is built using Python and incorporates several methodologies, inclu
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/tellco-telecom-analysis.git
+git clone https://github.com/your-username/customer-insights-analytics.git
 cd tellco-telecom-analysis
 ```
