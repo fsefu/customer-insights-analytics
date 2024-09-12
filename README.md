@@ -112,4 +112,7 @@ docker run -p 8501:8501 tellco-telecom-analysis
 - PostgreSQL/MySQL: Database systems for storing and querying the final results.
 - Docker: Containerization of the project for easy deployment.
 
+## Author
+Sefuwan Feysa
 
+Feel free to reach out for any questions or feedback at [sefuwanfd@gmail.com].
