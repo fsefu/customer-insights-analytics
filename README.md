@@ -115,4 +115,4 @@ docker run -p 8501:8501 tellco-telecom-analysis
 ## Author
 Sefuwan Feysa
 
-Feel free to reach out for any questions or feedback at [sefuwanfd@gmail.com].
+Feel free to reach out for any questions or feedback at sefuwanfd@gmail.com.
