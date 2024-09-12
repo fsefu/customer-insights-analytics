@@ -53,5 +53,5 @@ The analysis is built using Python and incorporates several methodologies, inclu
 
 ```bash
 git clone https://github.com/fsefu/customer-insights-analytics.git
-cd tellco-telecom-analysis
+cd customer-insights-analytics
 ```
