@@ -68,4 +68,48 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
+### 4. Setup Database Connections
+Ensure that PostgreSQL and MySQL databases are set up on your local machine or a remote server.
+Update the connection parameters in databases/connections.py.
+
+Also, create a .env file in the root directory of the project with the following content:
+
+```bash
+DB_NAME="teleco"
+DB_HOST="localhost"
+DB_PASSWORD=1234
+DB_USER="postgres"
+DB_PORT=5432
+```
+Make sure to replace these values with your actual database credentials if they differ.
+
+### 5. Running the Web-based Dashboard
+To launch the Streamlit dashboard, execute the following command:
+
+```bash
+streamlit run app/dashboard_analysis.py
+```
+
+### 6. Dockerized Deployment (Optional)
+If you want to deploy the project using Docker:
+
+```bash
+docker build -t tellco-telecom-analysis .
+docker run -p 8501:8501 tellco-telecom-analysis
+```
+
+## Key Features
+ - #### Exploratory Data Analysis (EDA)####: Comprehensive analysis of user engagement and experience data.
+ - K-Means Clustering: User segmentation based on experience and engagement scores.
+ - Regression Model for Satisfaction: Predicting customer satisfaction with high accuracy.
+ - Streamlit Dashboard: Interactive web-based dashboard for data exploration and visualization.
+ - Database Export: Final analysis results are exported to a PostgreSQL/MySQL database for further processing.
+## Technologies Used
+Python: Core programming language for analysis and model building.
+Pandas, NumPy: Data manipulation libraries.
+Scikit-learn: For machine learning algorithms such as clustering and regression.
+Streamlit: Framework for building the interactive dashboard.
+PostgreSQL/MySQL: Database systems for storing and querying the final results.
+Docker: Containerization of the project for easy deployment.
+
 
