@@ -44,3 +44,14 @@ The analysis is built using Python and incorporates several methodologies, inclu
 │   ├── requirements.txt     # Python dependencies.
 │   └── .gitignore           # Files and directories to be ignored in Git.
 └── README.md                # Project documentation.
+
+```
+
+# How to Run the Project
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/tellco-telecom-analysis.git
+cd tellco-telecom-analysis
+```
