@@ -36,7 +36,7 @@ class DbExporter:
             f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
         )
 
-    def export_to_postgres(self, df, table_name='user_scores_test', if_exists='replace'):
+    def export_to_postgres(self, df, table_name='user_scores', if_exists='replace'):
         """
         Export a DataFrame to a PostgreSQL table.
 
